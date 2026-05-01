@@ -27,6 +27,7 @@
             border: 1px solid #3a3a3a;
             border-radius: 8px;
             color: white;
+            font-size: 16px;
         }
         button {
             background: #00d4ff;
@@ -42,26 +43,37 @@
             padding: 20px;
             border-radius: 12px;
             margin-top: 20px;
+            text-align: left;
         }
         .status-pending { color: #f39c12; }
         .status-diagnosing { color: #3498db; }
         .status-repairing { color: #9b59b6; }
         .status-ready { color: #2ecc71; }
         .status-completed { color: #00d4ff; }
+        .error {
+            background: rgba(255,107,53,0.2);
+            border: 1px solid #ff6b35;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            color: #ff6b35;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h2>🔧 Track Your Repair Status</h2>
-    <p>Enter your phone number to check status</p>
-    <input type="tel" id="phone" placeholder="Your WhatsApp number">
+    <p>Enter your WhatsApp number used for the repair request</p>
+    <input type="tel" id="phone" placeholder="e.g., 9999999999">
     <button onclick="trackRepair()">Track Now</button>
     <div id="result"></div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+
 <script>
+// Firebase Config
 const firebaseConfig = {
     apiKey: "AIzaSyALYFAvawCvDobzjDuAJrsW4QUA-QII_qA",
     authDomain: "hbrtechmate.firebaseapp.com",
@@ -71,42 +83,89 @@ const firebaseConfig = {
     appId: "1:842820976781:web:3dc4bf7764d3d8fd61e2c4"
 };
 
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 async function trackRepair() {
-    const phone = document.getElementById('phone').value.trim();
-    if (!phone) {
-        alert('Enter your phone number');
-        return;
-    }
-    
-    const snapshot = await db.collection('repairs').where('phone', '==', phone).orderBy('createdAt', 'desc').limit(1).get();
+    let inputPhone = document.getElementById('phone').value.trim();
     const resultDiv = document.getElementById('result');
     
-    if (snapshot.empty) {
-        resultDiv.innerHTML = '<div class="status-card">❌ No repair found for this number.</div>';
+    if (!inputPhone) {
+        resultDiv.innerHTML = '<div class="error">❌ Please enter your phone number</div>';
         return;
     }
     
-    const repair = snapshot.docs[0].data();
-    const status = repair.status || 'Pending';
-    let statusClass = 'status-pending';
-    if (status === 'Diagnosing') statusClass = 'status-diagnosing';
-    else if (status === 'Repairing') statusClass = 'status-repairing';
-    else if (status === 'Ready') statusClass = 'status-ready';
-    else if (status === 'Completed') statusClass = 'status-completed';
+    // Extract only digits
+    let digits = inputPhone.replace(/\D/g, '');
+    let searchPhone = digits.slice(-10);
     
-    resultDiv.innerHTML = `
-        <div class="status-card">
-            <h3>📱 ${repair.deviceType} ${repair.deviceModel || ''}</h3>
-            <p>Issue: ${repair.issue}</p>
-            <p>Status: <span class="${statusClass}"><strong>${status}</strong></span></p>
-            <p>Submitted on: ${new Date(repair.createdAt?.toDate()).toLocaleDateString()}</p>
-            ${status === 'Ready' ? '<p>✅ Your device is ready for pickup!</p>' : ''}
-            ${status === 'Completed' ? '<p>🎉 Repair completed. Thank you for choosing HBRTechMate!</p>' : ''}
-        </div>
-    `;
+    if (searchPhone.length !== 10) {
+        resultDiv.innerHTML = '<div class="error">❌ Please enter a valid 10-digit phone number</div>';
+        return;
+    }
+    
+    resultDiv.innerHTML = '<div style="text-align:center">🔍 Searching...</div>';
+    
+    try {
+        // Try different phone formats
+        let phoneFormats = [searchPhone, '91' + searchPhone, '+91' + searchPhone];
+        let found = false;
+        
+        for (let phone of phoneFormats) {
+            const snapshot = await db.collection('repairs')
+                .where('phone', '==', phone)
+                .orderBy('createdAt', 'desc')
+                .limit(1)
+                .get();
+            
+            if (!snapshot.empty) {
+                const repair = snapshot.docs[0].data();
+                const status = repair.status || 'Pending';
+                let statusClass = 'status-pending';
+                let statusMessage = '';
+                
+                if (status === 'Pending') {
+                    statusClass = 'status-pending';
+                    statusMessage = 'We have received your request. We will contact you shortly.';
+                } else if (status === 'Diagnosing') {
+                    statusClass = 'status-diagnosing';
+                    statusMessage = 'Our technician is diagnosing your device.';
+                } else if (status === 'Repairing') {
+                    statusClass = 'status-repairing';
+                    statusMessage = 'Your device is currently being repaired.';
+                } else if (status === 'Ready') {
+                    statusClass = 'status-ready';
+                    statusMessage = '✅ Your device is ready for pickup! Please visit our store.';
+                } else if (status === 'Completed') {
+                    statusClass = 'status-completed';
+                    statusMessage = '🎉 Repair completed. Thank you for choosing HBRTechMate!';
+                }
+                
+                resultDiv.innerHTML = `
+                    <div class="status-card">
+                        <h3>📱 ${repair.deviceType} ${repair.deviceModel || ''}</h3>
+                        <p><strong>Issue:</strong> ${repair.issue}</p>
+                        <p><strong>Status:</strong> <span class="${statusClass}"><strong>${status}</strong></span></p>
+                        <p><strong>Submitted on:</strong> ${new Date(repair.createdAt?.toDate()).toLocaleDateString()}</p>
+                        <p><strong>Next step:</strong> ${statusMessage}</p>
+                        <hr>
+                        <p style="font-size: 12px;">📍 No 8/2, 1st Cross St, Nagawara Main Rd, Bengaluru</p>
+                        <p style="font-size: 12px;">📞 Contact us: 8105122693</p>
+                    </div>
+                `;
+                found = true;
+                break;
+            }
+        }
+        
+        if (!found) {
+            resultDiv.innerHTML = '<div class="error">❌ No repair request found for this number.</div>';
+        }
+    } catch (error) {
+        console.error(error);
+        resultDiv.innerHTML = '<div class="error">❌ Error loading data. Please try again.</div>';
+    }
 }
 </script>
 </body>
