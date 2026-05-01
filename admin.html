@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBRTechMate - Admin Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        h1 {
+            color: #00d4ff;
+            font-size: 1.8rem;
+        }
+        .login-form {
+            max-width: 400px;
+            margin: 100px auto;
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #2a2a2a;
+        }
+        .login-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+        }
+        .login-form button {
+            width: 100%;
+            padding: 12px;
+            background: #00d4ff;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #00d4ff;
+        }
+        .repairs-table {
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        th {
+            background: #0d0d0d;
+            color: #00d4ff;
+        }
+        .status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status-pending { background: #f39c12; color: #000; }
+        .status-diagnosing { background: #3498db; color: #fff; }
+        .status-repairing { background: #9b59b6; color: #fff; }
+        .status-ready { background: #2ecc71; color: #000; }
+        .status-completed { background: #00d4ff; color: #000; }
+        .select-status {
+            padding: 5px 10px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+        .logout-btn, .refresh-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .refresh-btn {
+            background: #00d4ff;
+            color: #000;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="app">
+    <div class="header">
+        <h1>🔧 HBRTechMate - Admin Panel</h1>
+        <div>
+            <button class="refresh-btn" onclick="loadRepairs()">🔄 Refresh</button>
+            <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+        </div>
+    </div>
+    <div id="dashboard">
+        <div class="stats" id="stats"></div>
+        <div class="repairs-table" id="repairsTable"></div>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+    apiKey: "AIzaSyALYFAvawCvDobzjDuAJrsW4QUA-QII_qA",
+    authDomain: "hbrtechmate.firebaseapp.com",
+    projectId: "hbrtechmate",
+    storageBucket: "hbrtechmate.firebasestorage.app",
+    messagingSenderId: "842820976781",
+    appId: "1:842820976781:web:3dc4bf7764d3d8fd61e2c4"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+let currentUser = null;
+let repairs = [];
+
+auth.onAuthStateChanged(user => {
+    if (user) {
+        currentUser = user;
+        document.getElementById('dashboard').style.display = 'block';
+        loadRepairs();
+    } else {
+        document.getElementById('dashboard').style.display = 'none';
+        showLogin();
+    }
+});
+
+function showLogin() {
+    document.getElementById('app').innerHTML = `
+        <div class="login-form">
+            <h2>🔐 Admin Login</h2>
+            <input type="email" id="email" placeholder="Email">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+        </div>
+    `;
+}
+
+async function login() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    try {
+        await auth.signInWithEmailAndPassword(email, password);
+        location.reload();
+    } catch (error) {
+        alert('Login failed: ' + error.message);
+    }
+}
+
+function logout() {
+    auth.signOut();
+    location.reload();
+}
+
+async function loadRepairs() {
+    const snapshot = await db.collection('repairs').orderBy('createdAt', 'desc').get();
+    repairs = [];
+    snapshot.forEach(doc => repairs.push({ id: doc.id, ...doc.data() }));
+    renderStats();
+    renderTable();
+}
+
+function renderStats() {
+    const pending = repairs.filter(r => r.status === 'Pending').length;
+    const diagnosing = repairs.filter(r => r.status === 'Diagnosing').length;
+    const repairing = repairs.filter(r => r.status === 'Repairing').length;
+    const completed = repairs.filter(r => r.status === 'Completed').length;
+    
+    document.getElementById('stats').innerHTML = `
+        <div class="stat-card"><div class="stat-number">${repairs.length}</div><div>Total</div></div>
+        <div class="stat-card"><div class="stat-number">${pending}</div><div>Pending</div></div>
+        <div class="stat-card"><div class="stat-number">${diagnosing}</div><div>Diagnosing</div></div>
+        <div class="stat-card"><div class="stat-number">${repairing}</div><div>Repairing</div></div>
+        <div class="stat-card"><div class="stat-number">${completed}</div><div>Completed</div></div>
+    `;
+}
+
+function renderTable() {
+    if (repairs.length === 0) {
+        document.getElementById('repairsTable').innerHTML = '<div style="padding: 40px; text-align: center;">No repair requests yet.</div>';
+        return;
+    }
+    
+    const html = `<table><thead><tr><th>ID</th><th>Date</th><th>Customer</th><th>Phone</th><th>Device</th><th>Issue</th><th>Status</th><th>Action</th></tr></thead><tbody>${repairs.map(repair => `<tr><td>#${repair.id.slice(0,6)}</td><td>${new Date(repair.createdAt?.toDate()).toLocaleDateString()}</td><td>${repair.name}</td><td>${repair.phone}</td><td>${repair.deviceType} ${repair.deviceModel || ''}</td><td>${repair.issue.substring(0,40)}...</td><td><span class="status status-${repair.status?.toLowerCase()}">${repair.status || 'Pending'}</span></td><td><select class="select-status" onchange="updateStatus('${repair.id}', this.value)"><option value="Pending" ${repair.status === 'Pending' ? 'selected' : ''}>Pending</option><option value="Diagnosing" ${repair.status === 'Diagnosing' ? 'selected' : ''}>Diagnosing</option><option value="Repairing" ${repair.status === 'Repairing' ? 'selected' : ''}>Repairing</option><option value="Ready" ${repair.status === 'Ready' ? 'selected' : ''}>Ready</option><option value="Completed" ${repair.status === 'Completed' ? 'selected' : ''}>Completed</option></select></td></tr>`).join('')}</tbody></table>`;
+    document.getElementById('repairsTable').innerHTML = html;
+}
+
+async function updateStatus(id, newStatus) {
+    await db.collection('repairs').doc(id).update({ status: newStatus });
+    loadRepairs();
+}
+</script>
+</body>
+</html>
