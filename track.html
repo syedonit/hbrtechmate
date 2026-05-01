@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Repair - HBRTechMate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0a0a0a;
+            color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 16px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            color: white;
+        }
+        button {
+            background: #00d4ff;
+            color: #000;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .status-card {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        .status-pending { color: #f39c12; }
+        .status-diagnosing { color: #3498db; }
+        .status-repairing { color: #9b59b6; }
+        .status-ready { color: #2ecc71; }
+        .status-completed { color: #00d4ff; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>🔧 Track Your Repair Status</h2>
+    <p>Enter your phone number to check status</p>
+    <input type="tel" id="phone" placeholder="Your WhatsApp number">
+    <button onclick="trackRepair()">Track Now</button>
+    <div id="result"></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+<script>
+const firebaseConfig = {
+    apiKey: "AIzaSyALYFAvawCvDobzjDuAJrsW4QUA-QII_qA",
+    authDomain: "hbrtechmate.firebaseapp.com",
+    projectId: "hbrtechmate",
+    storageBucket: "hbrtechmate.firebasestorage.app",
+    messagingSenderId: "842820976781",
+    appId: "1:842820976781:web:3dc4bf7764d3d8fd61e2c4"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+async function trackRepair() {
+    const phone = document.getElementById('phone').value.trim();
+    if (!phone) {
+        alert('Enter your phone number');
+        return;
+    }
+    
+    const snapshot = await db.collection('repairs').where('phone', '==', phone).orderBy('createdAt', 'desc').limit(1).get();
+    const resultDiv = document.getElementById('result');
+    
+    if (snapshot.empty) {
+        resultDiv.innerHTML = '<div class="status-card">❌ No repair found for this number.</div>';
+        return;
+    }
+    
+    const repair = snapshot.docs[0].data();
+    const status = repair.status || 'Pending';
+    let statusClass = 'status-pending';
+    if (status === 'Diagnosing') statusClass = 'status-diagnosing';
+    else if (status === 'Repairing') statusClass = 'status-repairing';
+    else if (status === 'Ready') statusClass = 'status-ready';
+    else if (status === 'Completed') statusClass = 'status-completed';
+    
+    resultDiv.innerHTML = `
+        <div class="status-card">
+            <h3>📱 ${repair.deviceType} ${repair.deviceModel || ''}</h3>
+            <p>Issue: ${repair.issue}</p>
+            <p>Status: <span class="${statusClass}"><strong>${status}</strong></span></p>
+            <p>Submitted on: ${new Date(repair.createdAt?.toDate()).toLocaleDateString()}</p>
+            ${status === 'Ready' ? '<p>✅ Your device is ready for pickup!</p>' : ''}
+            ${status === 'Completed' ? '<p>🎉 Repair completed. Thank you for choosing HBRTechMate!</p>' : ''}
+        </div>
+    `;
+}
+</script>
+</body>
+</html>
