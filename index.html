@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>HBRTechMate – Phone & Laptop Repair | Sales | HBR Layout Bangalore</title>
+<meta name="description" content="HBRTechMate – Trusted phone & laptop repair, sales and accessories in HBR Layout, Bangalore. Fast turnaround, genuine parts, best prices guaranteed.">
+<meta property="og:title" content="HBRTechMate 🔧 Phone & Laptop Repair | HBR Bangalore">
+<meta property="og:description" content="Screen replacement, battery, motherboard, data recovery & more. Walk in or WhatsApp us!">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="HBRTechMate">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0a0a0a;
+  --bg2:#111;
+  --bg3:#181818;
+  --card:#1a1a1a;
+  --border:#2a2a2a;
+  --accent:#00d4ff;
+  --accent2:#0099cc;
+  --orange:#ff6b35;
+  --green:#00c853;
+  --txt:#f0f0f0;
+  --txt2:#aaa;
+  --txt3:#666;
+  --radius:16px;
+  --radius-sm:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);color:var(--txt);
+  overflow-x:hidden;line-height:1.6;
+}
+a{text-decoration:none;color:inherit;}
+img{display:block;}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px;}
+
+/* ── TOP MARQUEE ── */
+.marquee-wrap{
+  background:var(--accent);color:#000;
+  padding:6px 0;overflow:hidden;font-size:.75rem;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;
+}
+.marquee-track{
+  display:inline-block;
+  animation:marquee 25s linear infinite;
+}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee-item{display:inline-block;padding:0 2rem;}
+.marquee-dot{color:rgba(0,0,0,.4);margin:0 .3rem;}
+
+/* ── NAV ── */
+nav{
+  background:rgba(10,10,10,.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:0 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:200;height:60px;
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;
+  font-size:1.15rem;font-weight:800;
+  display:flex;align-items:center;gap:8px;
+  letter-spacing:-.02em;
+}
+.logo-icon{
+  width:32px;height:32px;background:var(--accent);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;color:#000;font-weight:900;
+}
+.logo-txt span{color:var(--accent);}
+.nav-links{display:flex;gap:2px;}
+.nav-link{
+  font-size:.82rem;font-weight:500;color:var(--txt2);
+  padding:6px 12px;border-radius:8px;transition:all .15s;
+}
+.nav-link:hover{color:var(--txt);background:var(--border);}
+.nav-wa{
+  background:var(--accent);color:#000;
+  padding:8px 16px;border-radius:24px;
+  font-size:.8rem;font-weight:700;
+  display:flex;align-items:center;gap:6px;
+  transition:transform .15s,box-shadow .15s;
+}
+.nav-wa:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,212,255,.3);}
+
+/* ── HERO ── */
+.hero{
+  min-height:92vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:3rem 1.5rem 4rem;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%,rgba(0,212,255,.12) 0%,transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%,rgba(255,107,53,.06) 0%,transparent 60%);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--border) 1px,transparent 1px),
+    linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:60px 60px;
+  opacity:.35;
+  mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);
+  color:var(--accent);padding:5px 14px;border-radius:20px;
+  font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:1.5rem;position:relative;
+  animation:fade-up .6s ease forwards;
+}
+.hero-tag::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--accent);animation:blink 1.5s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2.4rem,7vw,5.5rem);
+  font-weight:800;line-height:1.0;
+  letter-spacing:-.03em;
+  margin-bottom:1rem;
+  position:relative;
+  animation:fade-up .6s .1s ease both;
+}
+.hero h1 .line2{
+  display:block;
+  background:linear-gradient(90deg,var(--accent),#00aaff,var(--accent));
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{to{background-position:200% center}}
+.hero-sub{
+  font-size:1rem;color:var(--txt2);max-width:480px;margin:0 auto 2rem;
+  line-height:1.65;
+  animation:fade-up .6s .2s ease both;
+}
+@keyframes fade-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-btns{
+  display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;
+  animation:fade-up .6s .3s ease both;
+}
+.btn-primary{
+  background:var(--accent);color:#000;
+  padding:13px 28px;border-radius:50px;
+  font-size:.9rem;font-weight:700;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:transform .15s,box-shadow .15s;
+  box-shadow:0 0 24px rgba(0,212,255,.3);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 36px rgba(0,212,255,.5);}
+.btn-outline{
+  background:transparent;color:var(--txt);
+  border:1.5px solid var(--border);
+  padding:13px 28px;border-radius:50px;
+  font-size:.9rem;font-weight:600;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .15s;
+}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+.hero-stats{
+  display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;
+  margin-top:3.5rem;padding-top:2rem;
+  border-top:1px solid var(--border);
+  position:relative;
+  animation:fade-up .6s .4s ease both;
+}
+.hero-stat-val{
+  font-family:'Syne',sans-serif;
+  font-size:2rem;font-weight:800;color:var(--accent);
+}
+.hero-stat-lbl{font-size:.72rem;color:var(--txt3);letter-spacing:.06em;text-transform:uppercase;margin-top:2px;}
+
+/* ── SECTION ── */
+.sec{padding:4rem 1.5rem;}
+.sec-inner{max-width:1060px;margin:0 auto;}
+.sec-label{
+  font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:.6rem;
+}
+.sec-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.6rem,4vw,2.6rem);font-weight:800;
+  letter-spacing:-.02em;margin-bottom:.5rem;
+}
+.sec-sub{font-size:.9rem;color:var(--txt2);max-width:500px;line-height:1.6;}
+
+/* ── SERVICES ── */
+.services-sec{background:var(--bg);}
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:1rem;margin-top:2.5rem;
+}
+.service-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.4rem;
+  transition:transform .2s,border-color .2s,box-shadow .2s;
+  cursor:pointer;position:relative;overflow:hidden;
+}
+.service-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,212,255,.06) 0%,transparent 60%);
+  opacity:0;transition:opacity .2s;
+}
+.service-card:hover{transform:translateY(-4px);border-color:rgba(0,212,255,.3);box-shadow:0 8px 32px rgba(0,212,255,.1);}
+.service-card:hover::before{opacity:1;}
+.service-icon{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;margin-bottom:1rem;
+}
+.service-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.35rem;}
+.service-card p{font-size:.78rem;color:var(--txt2);line-height:1.5;}
+.service-price{
+  margin-top:.75rem;font-size:.78rem;font-weight:700;
+  color:var(--accent);display:flex;align-items:center;gap:4px;
+}
+.service-tag{
+  display:inline-block;font-size:.62rem;font-weight:700;
+  padding:2px 8px;border-radius:20px;margin-top:.5rem;
+  letter-spacing:.04em;text-transform:uppercase;
+}
+
+/* ── HOW IT WORKS ── */
+.how-sec{background:var(--bg2);}
+.how-steps{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1.5rem;margin-top:2.5rem;position:relative;
+}
+.how-step{text-align:center;padding:1.5rem 1rem;}
+.step-num{
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(0,212,255,.1);border:2px solid rgba(0,212,255,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;
+  color:var(--accent);margin:0 auto 1rem;
+}
+.how-step h4{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.4rem;}
+.how-step p{font-size:.78rem;color:var(--txt2);line-height:1.5;}
+
+/* ── BRANDS WE FIX ── */
+.brands-sec{background:var(--bg);}
+.brands-scroll{
+  display:flex;gap:1rem;overflow-x:auto;
+  scrollbar-width:none;padding:.5rem 0 1rem;
+  -webkit-overflow-scrolling:touch;
+  margin-top:2rem;
+}
+.brands-scroll::-webkit-scrollbar{display:none;}
+.brand-chip{
+  flex-shrink:0;background:var(--card);border:1px solid var(--border);
+  border-radius:50px;padding:10px 20px;
+  font-size:.82rem;font-weight:700;color:var(--txt2);
+  display:flex;align-items:center;gap:8px;
+  transition:all .15s;cursor:default;white-space:nowrap;
+}
+.brand-chip:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ── WHY US ── */
+.why-sec{background:var(--bg2);}
+.why-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:1rem;margin-top:2.5rem;
+}
+.why-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.4rem;
+  display:flex;gap:1rem;align-items:flex-start;
+}
+.why-icon{font-size:1.6rem;flex-shrink:0;margin-top:2px;}
+.why-card h4{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.3rem;}
+.why-card p{font-size:.78rem;color:var(--txt2);line-height:1.5;}
+
+/* ── PRICE TABLE ── */
+.price-sec{background:var(--bg);}
+.price-tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+.price-tab{
+  background:var(--card);border:1.5px solid var(--border);
+  color:var(--txt2);padding:7px 16px;border-radius:20px;
+  font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s;
+}
+.price-tab.active{background:var(--accent);border-color:var(--accent);color:#000;}
+.price-table{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+}
+.price-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.85rem 1.2rem;border-bottom:1px solid var(--border);
+  transition:background .12s;
+}
+.price-row:last-child{border-bottom:none;}
+.price-row:hover{background:rgba(0,212,255,.04);}
+.price-service{font-size:.85rem;font-weight:600;}
+.price-device{font-size:.72rem;color:var(--txt3);margin-top:2px;}
+.price-amt{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--accent);white-space:nowrap;}
+.price-time{font-size:.68rem;color:var(--txt3);text-align:right;margin-top:2px;}
+
+/* ── TESTIMONIALS ── */
+.reviews-sec{background:var(--bg2);}
+.reviews-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1rem;margin-top:2.5rem;
+}
+.review-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.4rem;
+}
+.stars{color:#ffc107;font-size:.85rem;margin-bottom:.7rem;}
+.review-text{font-size:.82rem;color:var(--txt2);line-height:1.6;font-style:italic;margin-bottom:.9rem;}
+.reviewer{display:flex;align-items:center;gap:.7rem;}
+.reviewer-av{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--orange));
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;font-weight:800;color:#000;flex-shrink:0;
+}
+.reviewer-name{font-size:.82rem;font-weight:700;}
+.reviewer-loc{font-size:.7rem;color:var(--txt3);}
+
+/* ── CONTACT / MAP ── */
+.contact-sec{background:var(--bg);}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1.5rem;margin-top:2.5rem;
+}
+@media(max-width:680px){.contact-grid{grid-template-columns:1fr;}}
+.contact-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+}
+.contact-card iframe{width:100%;height:250px;border:none;display:block;filter:grayscale(1) invert(1);}
+.contact-info{padding:1.2rem;}
+.contact-info h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:1rem;color:var(--accent);}
+.contact-links{display:flex;flex-direction:column;gap:.6rem;}
+.contact-link{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.7rem .9rem;border-radius:10px;
+  background:var(--bg2);border:1px solid var(--border);
+  font-size:.82rem;transition:border-color .15s;
+}
+.contact-link:hover{border-color:var(--accent);}
+.cl-icon{font-size:1.1rem;width:28px;text-align:center;}
+.cl-label{font-size:.66rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.05em;display:block;}
+.cl-val{font-weight:700;color:var(--txt);}
+
+/* ── CTA BANNER ── */
+.cta-sec{
+  background:linear-gradient(135deg,#001a22,#002a35);
+  border-top:1px solid rgba(0,212,255,.15);
+  border-bottom:1px solid rgba(0,212,255,.15);
+  padding:4rem 1.5rem;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta-sec::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,rgba(0,212,255,.08) 0%,transparent 65%);
+}
+.cta-sec h2{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.8rem,4vw,3rem);font-weight:800;
+  letter-spacing:-.02em;margin-bottom:.6rem;position:relative;
+}
+.cta-sec p{font-size:.9rem;color:var(--txt2);margin-bottom:1.8rem;position:relative;}
+.cta-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;position:relative;}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--bg2);border-top:1px solid var(--border);
+  padding:2.5rem 1.5rem;text-align:center;
+}
+.footer-logo{
+  font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;
+  color:var(--accent);margin-bottom:.5rem;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+footer p{font-size:.78rem;color:var(--txt3);line-height:1.8;}
+.footer-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin:.8rem 0;}
+.footer-link{font-size:.76rem;color:var(--txt3);transition:color .15s;}
+.footer-link:hover{color:var(--accent);}
+
+/* ── FLOAT ── */
+.float-wa{
+  position:fixed;bottom:22px;right:18px;z-index:999;
+  background:#25d366;color:white;
+  width:54px;height:54px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;text-decoration:none;
+  box-shadow:0 4px 20px rgba(37,211,102,.5);
+  animation:float-bob 3s ease-in-out infinite;
+}
+@keyframes float-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.float-tip{
+  position:fixed;bottom:32px;right:80px;z-index:998;
+  background:white;color:#111;font-size:.74rem;font-weight:700;
+  padding:6px 12px;border-radius:20px;
+  box-shadow:0 2px 12px rgba(0,0,0,.15);
+  white-space:nowrap;animation:float-bob 3s ease-in-out infinite;
+  font-family:'DM Sans',sans-serif;
+}
+
+/* ── BOTTOM NAV (MOBILE) ── */
+.bottom-nav{
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:190;
+  background:rgba(17,17,17,.95);backdrop-filter:blur(20px);
+  border-top:1px solid var(--border);
+  padding:8px 0 max(8px,env(safe-area-inset-bottom));
+}
+.bottom-nav-inner{display:flex;justify-content:space-around;}
+.bn-tab{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:4px 12px;border-radius:8px;cursor:pointer;
+  text-decoration:none;color:var(--txt3);flex:1;
+  transition:color .15s;border:none;background:none;
+  font-family:'DM Sans',sans-serif;
+}
+.bn-tab.active,.bn-tab:hover{color:var(--accent);}
+.bn-icon{font-size:1.2rem;}
+.bn-label{font-size:.58rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .bottom-nav{display:block;}
+  body{padding-bottom:70px;}
+  .float-tip{display:none;}
+  .float-wa{bottom:88px;}
+}
+@media(max-width:480px){
+  .hero-stats{gap:1.5rem;}
+  .hero-stat-val{font-size:1.5rem;}
+}
+
+/* ── ANIMATIONS ON SCROLL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- FLOAT WA -->
+<a href="https://wa.me/918105122693?text=Hi!%20I%20need%20help%20with%20my%20device%20repair.%20I%20saw%20your%20website%20HBRTechMate." target="_blank" class="float-wa" aria-label="WhatsApp">💬</a>
+<div class="float-tip">💬 Get a Free Quote</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <a href="#" class="bn-tab active"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></a>
+    <a href="#services" class="bn-tab"><span class="bn-icon">🔧</span><span class="bn-label">Services</span></a>
+    <a href="https://wa.me/918105122693?text=Hi!%20I%20need%20repair%20help." target="_blank" class="bn-tab" style="color:#25d366"><span class="bn-icon">💬</span><span class="bn-label">WhatsApp</span></a>
+    <a href="#pricing" class="bn-tab"><span class="bn-icon">💰</span><span class="bn-label">Pricing</span></a>
+    <a href="#contact" class="bn-tab"><span class="bn-icon">📍</span><span class="bn-label">Location</span></a>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">🔧 Screen Replacement</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">🔋 Battery Replacement</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">💾 Data Recovery</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">🖥️ Laptop Repair</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">📱 Phone Repair</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">⚡ Same Day Service</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">✅ Genuine Parts</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">🛡️ 30-Day Warranty</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">🔧 Screen Replacement</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">🔋 Battery Replacement</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">💾 Data Recovery</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">🖥️ Laptop Repair</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">📱 Phone Repair</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">⚡ Same Day Service</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">✅ Genuine Parts</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">🛡️ 30-Day Warranty</span><span class="marquee-dot">·</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="logo-icon">H</div>
+    <div class="logo-txt">HBR<span>Tech</span>Mate</div>
+  </div>
+  <div class="nav-links">
+    <a href="#services" class="nav-link">Services</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+    <a href="#reviews" class="nav-link">Reviews</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </div>
+  <a href="https://wa.me/91XXXXXXXXXX?text=Hi!%20I%20need%20a%20device%20repair%20quote." target="_blank" class="nav-wa">💬 WhatsApp Us</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-tag">🟢 Open Now · HBR Layout, Bangalore</div>
+  <h1>
+    Your Device.<br>
+    <span class="line2">Fixed Fast.</span>
+  </h1>
+  <p class="hero-sub">Trusted phone & laptop repair in HBR Layout, Bangalore. Screen, battery, motherboard, data recovery & more — same day service with genuine parts.</p>
+  <div class="hero-btns">
+    <a href="https://wa.me/91XXXXXXXXXX?text=Hi!%20I%20need%20a%20repair%20quote%20for%20my%20device." target="_blank" class="btn-primary">💬 Get Free Quote</a>
+    <a href="#services" class="btn-outline">🔧 Our Services</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-val">2000+</div>
+      <div class="hero-stat-lbl">Devices Fixed</div>
+    </div>
+    <div>
+      <div class="hero-stat-val">⭐ 4.9</div>
+      <div class="hero-stat-lbl">Google Rating</div>
+    </div>
+    <div>
+      <div class="hero-stat-val">30 Min</div>
+      <div class="hero-stat-lbl">Avg. Repair Time</div>
+    </div>
+    <div>
+      <div class="hero-stat-val">30 Day</div>
+      <div class="hero-stat-lbl">Warranty</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-sec sec reveal" id="services">
+  <div class="sec-inner">
+    <div class="sec-label">What We Do</div>
+    <h2 class="sec-title">Our Repair Services</h2>
+    <p class="sec-sub">From cracked screens to dead motherboards — we fix it all with genuine parts and a 30-day warranty.</p>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon" style="background:rgba(0,212,255,.1)">📱</div>
+        <h3>Screen Replacement</h3>
+        <p>Cracked or broken display? We replace screens for all major brands — iPhone, Samsung, OnePlus, Vivo & more.</p>
+        <div class="service-price">Starting ₹599 →</div>
+        <span class="service-tag" style="background:rgba(0,200,83,.1);color:#00c853">⚡ 30 Min Service</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon" style="background:rgba(255,107,53,.1)">🔋</div>
+        <h3>Battery Replacement</h3>
+        <p>Phone draining fast? We replace with genuine high-capacity batteries. Battery health restored to 100%.</p>
+        <div class="service-price">Starting ₹399 →</div>
+        <span class="service-tag" style="background:rgba(0,200,83,.1);color:#00c853">⚡ 20 Min Service</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon" style="background:rgba(255,193,7,.1)">💾</div>
+        <h3>Data Recovery</h3>
+        <p>Lost your photos, contacts or files? We recover data from damaged, water-logged or dead phones & laptops.</p>
+        <div class="service-price">Starting ₹999 →</div>
+        <span class="service-tag" style="background:rgba(255,193,7,.1);color:#ffc107">🔬 Advanced Service</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon" style="background:rgba(156,39,176,.1)">🖥️</div>
+        <h3>Laptop Repair</h3>
+        <p>Screen, keyboard, hinges, charging port, motherboard — complete laptop repair for all brands.</p>
+        <div class="service-price">Starting ₹499 →</div>
+        <span class="service-tag" style="background:rgba(0,212,255,.1);color:var(--accent)">🛠️ All Brands</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon" style="background:rgba(0,200,83,.1)">🔌</div>
+        <h3>Charging Port Fix</h3>
+        <p>Phone not charging? Loose port or water damage. We clean or replace the charging port quickly.</p>
+        <div class="service-price">Starting ₹299 →</div>
+        <span class="service-tag" style="background:rgba(0,200,83,.1);color:#00c853">⚡ Same Day</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon" style="background:rgba(255,107,53,.1)">🌊</div>
+        <h3>Water Damage Repair</h3>
+        <p>Dropped your phone in water? Bring it immediately — we dry, clean and repair water-damaged devices.</p>
+        <div class="service-price">Starting ₹799 →</div>
+        <span class="service-tag" style="background:rgba(255,107,53,.1);color:var(--orange)">🚨 Urgent Care</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon" style="background:rgba(0,212,255,.1)">🛒</div>
+        <h3>Phone & Laptop Sales</h3>
+        <p>Buy certified refurbished & new phones and laptops at the best prices. All devices tested & warranted.</p>
+        <div class="service-price">Best Prices in HBR →</div>
+        <span class="service-tag" style="background:rgba(0,212,255,.1);color:var(--accent)">✅ Warranted</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon" style="background:rgba(255,193,7,.1)">🎧</div>
+        <h3>Accessories & Spares</h3>
+        <p>Chargers, cables, cases, screen guards, earphones — all original accessories at wholesale prices.</p>
+        <div class="service-price">Best Prices →</div>
+        <span class="service-tag" style="background:rgba(255,193,7,.1);color:#ffc107">🏷️ Wholesale Rates</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-sec sec reveal">
+  <div class="sec-inner">
+    <div class="sec-label">Simple Process</div>
+    <h2 class="sec-title">How It Works</h2>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="step-num">1</div>
+        <h4>WhatsApp Us</h4>
+        <p>Tell us your problem. We'll give you a free quote instantly — no hidden charges.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num">2</div>
+        <h4>Walk In or Drop Off</h4>
+        <p>Visit our store at HBR Layout. We diagnose your device for free on the spot.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num">3</div>
+        <h4>Fast Repair</h4>
+        <p>Most repairs done in 20–60 minutes using genuine parts by certified technicians.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num">4</div>
+        <h4>Collect & Go</h4>
+        <p>Pick up your device. Pay only after you're satisfied. 30-day warranty on every repair.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section class="brands-sec sec reveal">
+  <div class="sec-inner">
+    <div class="sec-label">All Brands Supported</div>
+    <h2 class="sec-title">We Fix Every Brand</h2>
+    <div class="brands-scroll">
+      <div class="brand-chip">🍎 Apple iPhone</div>
+      <div class="brand-chip">📱 Samsung</div>
+      <div class="brand-chip">🔴 OnePlus</div>
+      <div class="brand-chip">📲 Vivo</div>
+      <div class="brand-chip">📱 Oppo</div>
+      <div class="brand-chip">📱 Realme</div>
+      <div class="brand-chip">📱 Redmi / Xiaomi</div>
+      <div class="brand-chip">📱 Poco</div>
+      <div class="brand-chip">📱 Motorola</div>
+      <div class="brand-chip">📱 Nokia</div>
+      <div class="brand-chip">💻 Dell</div>
+      <div class="brand-chip">💻 HP</div>
+      <div class="brand-chip">💻 Lenovo</div>
+      <div class="brand-chip">💻 Asus</div>
+      <div class="brand-chip">💻 Acer</div>
+      <div class="brand-chip">🍎 MacBook</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-sec sec reveal">
+  <div class="sec-inner">
+    <div class="sec-label">Why HBRTechMate</div>
+    <h2 class="sec-title">Why Customers Choose Us</h2>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-icon">⚡</div><div><h4>Same Day Repair</h4><p>Most repairs completed in 30–60 minutes. Drop in, wait, and walk out with a fixed device.</p></div></div>
+      <div class="why-card"><div class="why-icon">✅</div><div><h4>Genuine Parts Only</h4><p>We use only certified genuine parts — no cheap duplicates that fail in 2 weeks.</p></div></div>
+      <div class="why-card"><div class="why-icon">🛡️</div><div><h4>30-Day Warranty</h4><p>All repairs come with a 30-day warranty. If it fails, we fix it again — free of charge.</p></div></div>
+      <div class="why-card"><div class="why-icon">💰</div><div><h4>Transparent Pricing</h4><p>Free diagnosis. We tell you the price upfront — no surprise bills at the end.</p></div></div>
+      <div class="why-card"><div class="why-icon">👨‍🔧</div><div><h4>Certified Technicians</h4><p>Our technicians are trained & certified with 5+ years of hands-on experience.</p></div></div>
+      <div class="why-card"><div class="why-icon">📍</div><div><h4>Convenient Location</h4><p>Located in the heart of HBR Layout — easy to reach from anywhere in North Bangalore.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="price-sec sec reveal" id="pricing">
+  <div class="sec-inner">
+    <div class="sec-label">Transparent Pricing</div>
+    <h2 class="sec-title">Repair Price Guide</h2>
+    <p class="sec-sub" style="margin-bottom:1.5rem">Estimated prices — final cost shared after free diagnosis. No hidden fees.</p>
+    <div class="price-tabs">
+      <div class="price-tab active" onclick="showPrices('phone',this)">📱 Phone</div>
+      <div class="price-tab" onclick="showPrices('laptop',this)">💻 Laptop</div>
+      <div class="price-tab" onclick="showPrices('iphone',this)">🍎 iPhone</div>
+    </div>
+    <div class="price-table" id="priceTable"></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-sec sec reveal" id="reviews">
+  <div class="sec-inner">
+    <div class="sec-label">Customer Reviews</div>
+    <h2 class="sec-title">What HBR Locals Say</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <div class="review-text">"Got my Samsung S22 screen replaced in under 40 minutes. Perfect quality, looks brand new. Price was very reasonable compared to Samsung service center!"</div>
+        <div class="reviewer"><div class="reviewer-av">R</div><div><div class="reviewer-name">Rahul Sharma</div><div class="reviewer-loc">📍 HBR Layout</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <div class="review-text">"My laptop motherboard was completely dead. They recovered all my data and fixed it. Very honest people — told me exact cost before starting work. Highly recommend!"</div>
+        <div class="reviewer"><div class="reviewer-av">P</div><div><div class="reviewer-name">Priya Menon</div><div class="reviewer-loc">📍 Kalyan Nagar</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <div class="review-text">"iPhone 14 battery replaced. Original Apple battery, 30 min service. WhatsApp quote was instant and accurate. Best tech repair shop in HBR!"</div>
+        <div class="reviewer"><div class="reviewer-av">A</div><div><div class="reviewer-name">Arjun Nair</div><div class="reviewer-loc">📍 Banaswadi</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <div class="review-text">"Water damage repair — thought my phone was gone forever. They fixed it and even recovered all my photos. Amazing service, very affordable. 5 stars!"</div>
+        <div class="reviewer"><div class="reviewer-av">F</div><div><div class="reviewer-name">Fathima Begum</div><div class="reviewer-loc">📍 Nagawara</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <div class="review-text">"Bought a refurbished iPhone from here. Got 6 months warranty. Phone is in perfect condition. Much cheaper than buying new. Very happy with the purchase!"</div>
+        <div class="reviewer"><div class="reviewer-av">K</div><div><div class="reviewer-name">Kiran Kumar</div><div class="reviewer-loc">📍 RT Nagar</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <div class="review-text">"HP laptop screen cracked, replaced in 1 hour. Genuine part, works perfectly. Very professional staff, clean shop. Will definitely come back!"</div>
+        <div class="reviewer"><div class="reviewer-av">S</div><div><div class="reviewer-name">Sneha Reddy</div><div class="reviewer-loc">📍 Hennur</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-sec sec reveal" id="contact">
+  <div class="sec-inner">
+    <div class="sec-label">Find Us</div>
+    <h2 class="sec-title">Visit Our Store</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.3!2d77.6280!3d13.0440!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae17e!3A0x1!2sHBR+Layout+Bangalore!5e0!3m2!1sen!2sin!4v1700000000001"
+          loading="lazy" allowfullscreen>
+        </iframe>
+        <div class="contact-info">
+          <a href="https://maps.google.com/?q=HBR+Layout+Bangalore" target="_blank" class="btn-primary" style="display:inline-flex;margin-top:0;padding:10px 20px;font-size:.8rem;">🗺️ Get Directions</a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-info" style="padding:1.4rem">
+          <h3>🔧 HBRTechMate</h3>
+          <div class="contact-links">
+            <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="contact-link">
+              <span class="cl-icon">💬</span>
+              <div><span class="cl-label">WhatsApp</span><span class="cl-val">+91 XXXXX XXXXX</span></div>
+            </a>
+            <a href="tel:+91XXXXXXXXXX" class="contact-link">
+              <span class="cl-icon">📞</span>
+              <div><span class="cl-label">Call Us</span><span class="cl-val">+91 XXXXX XXXXX</span></div>
+            </a>
+            <div class="contact-link">
+              <span class="cl-icon">📍</span>
+              <div><span class="cl-label">Address</span><span class="cl-val">HBR Layout, Bangalore 560043</span></div>
+            </div>
+            <div class="contact-link">
+              <span class="cl-icon">🕐</span>
+              <div><span class="cl-label">Working Hours</span><span class="cl-val">Mon–Sat: 9 AM – 8 PM</span></div>
+            </div>
+            <div class="contact-link">
+              <span class="cl-icon">📅</span>
+              <div><span class="cl-label">Sunday</span><span class="cl-val">10 AM – 6 PM</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <h2>Device Broken?<br>We Fix It Today. ⚡</h2>
+  <p>WhatsApp us your problem — get a free quote in 2 minutes. No fix, no fee!</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/91XXXXXXXXXX?text=Hi!%20I%20need%20repair%20help%20for%20my%20device." target="_blank" class="btn-primary">💬 WhatsApp for Free Quote</a>
+    <a href="tel:+91XXXXXXXXXX" class="btn-outline">📞 Call Now</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🔧 HBRTechMate</div>
+  <p>HBR Layout, Bangalore 560043<br>Trusted Phone & Laptop Repair · Sales · Accessories</p>
+  <div class="footer-links">
+    <a href="#services" class="footer-link">Services</a>
+    <a href="#pricing" class="footer-link">Pricing</a>
+    <a href="#reviews" class="footer-link">Reviews</a>
+    <a href="#contact" class="footer-link">Contact</a>
+  </div>
+  <p>© 2025 HBRTechMate · All rights reserved · Bangalore</p>
+</footer>
+
+<script>
+/* ── PRICE DATA ── */
+const prices = {
+  phone: [
+    { service:'Screen Replacement', device:'Samsung / Vivo / Oppo / Realme', price:'₹599 – ₹2,499', time:'30 min' },
+    { service:'Screen Replacement', device:'OnePlus / Motorola', price:'₹899 – ₹3,499', time:'30 min' },
+    { service:'Battery Replacement', device:'All Android Phones', price:'₹399 – ₹999', time:'20 min' },
+    { service:'Charging Port Repair', device:'All Android Phones', price:'₹299 – ₹799', time:'30 min' },
+    { service:'Back Glass Replacement', device:'Samsung / All Brands', price:'₹499 – ₹1,499', time:'45 min' },
+    { service:'Water Damage Repair', device:'All Phones', price:'₹799 – ₹2,999', time:'1–2 hrs' },
+    { service:'Speaker / Mic Repair', device:'All Android Phones', price:'₹299 – ₹699', time:'30 min' },
+    { service:'Front Camera / Rear Camera', device:'All Phones', price:'₹499 – ₹1,999', time:'45 min' },
+  ],
+  laptop: [
+    { service:'Screen Replacement', device:'Dell / HP / Lenovo / Asus / Acer', price:'₹2,499 – ₹8,999', time:'1–2 hrs' },
+    { service:'Battery Replacement', device:'All Laptops', price:'₹1,499 – ₹4,999', time:'45 min' },
+    { service:'Keyboard Replacement', device:'All Laptops', price:'₹999 – ₹3,499', time:'1 hr' },
+    { service:'Charging Port / Adapter', device:'All Laptops', price:'₹499 – ₹1,999', time:'30 min' },
+    { service:'RAM Upgrade', device:'All Laptops', price:'₹999 – ₹3,999', time:'30 min' },
+    { service:'SSD / Hard Drive Upgrade', device:'All Laptops', price:'₹1,499 – ₹5,999', time:'1 hr' },
+    { service:'OS Installation', device:'Windows / Mac', price:'₹499 – ₹999', time:'1 hr' },
+    { service:'Motherboard Repair', device:'All Laptops', price:'₹1,999 – ₹9,999', time:'1–3 days' },
+  ],
+  iphone: [
+    { service:'Screen Replacement', device:'iPhone 11 / 12 / 13', price:'₹2,499 – ₹5,999', time:'30 min' },
+    { service:'Screen Replacement', device:'iPhone 14 / 15', price:'₹4,999 – ₹9,999', time:'45 min' },
+    { service:'Battery Replacement', device:'All iPhone Models', price:'₹999 – ₹2,999', time:'20 min' },
+    { service:'Charging Port / Lightning', device:'All iPhones', price:'₹1,299 – ₹2,499', time:'30 min' },
+    { service:'Back Glass Replacement', device:'iPhone 11 – 15', price:'₹1,999 – ₹4,999', time:'1 hr' },
+    { service:'Face ID / Touch ID Repair', device:'All iPhones', price:'₹2,999 – ₹5,999', time:'1 hr' },
+    { service:'Camera Replacement', device:'All iPhones', price:'₹1,999 – ₹5,999', time:'45 min' },
+    { service:'Water Damage', device:'All iPhones', price:'₹1,999 – ₹5,999', time:'1–2 hrs' },
+  ]
+};
+
+function showPrices(category, el) {
+  document.querySelectorAll('.price-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const rows = prices[category];
+  document.getElementById('priceTable').innerHTML = rows.map(r => `
+    <div class="price-row">
+      <div><div class="price-service">${r.service}</div><div class="price-device">${r.device}</div></div>
+      <div style="text-align:right"><div class="price-amt">${r.price}</div><div class="price-time">⏱ ${r.time}</div></div>
+    </div>
+  `).join('');
+}
+showPrices('phone', document.querySelector('.price-tab'));
+
+/* ── SCROLL REVEAL ── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ── BOTTOM NAV ACTIVE ── */
+document.querySelectorAll('.bn-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.bn-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
