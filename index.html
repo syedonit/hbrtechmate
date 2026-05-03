@@ -1,377 +1,701 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>HBRTechMate | Mobile & Laptop Repair Aggregator | Indiranagar, Bangalore</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f4f6fa;
-            color: #0a0c12;
-            line-height: 1.4;
-        }
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        /* Compact header */
-        .header {
-            background: #0a0c10;
-            color: white;
-            padding: 12px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .header-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .logo h1 {
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-        .logo span {
-            color: #3b82f6;
-        }
-        .cart-icon {
-            background: #1e293b;
-            padding: 6px 14px;
-            border-radius: 40px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-        .cart-count {
-            background: #ef4444;
-            border-radius: 30px;
-            padding: 2px 8px;
-            font-size: 0.75rem;
-        }
-        .btn {
-            background: #3b82f6;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 40px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-        .btn-small {
-            padding: 6px 12px;
-            font-size: 0.8rem;
-        }
-        .hero {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            color: white;
-            border-radius: 20px;
-            padding: 24px 20px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        .badge {
-            background: #10b981;
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        .form-section {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            margin: 20px 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        .tech-card {
-            background: #fef9e3;
-            border-left: 5px solid #f59e0b;
-            border-radius: 16px;
-            padding: 16px;
-            margin: 20px 0;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        .product-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-            transition: 0.2s;
-            cursor: pointer;
-        }
-        .product-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-        .product-img {
-            background: #eef2ff;
-            text-align: center;
-            padding: 20px 0;
-            font-size: 2.5rem;
-        }
-        .product-info {
-            padding: 14px;
-        }
-        .product-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-        .product-price {
-            color: #3b82f6;
-            font-weight: 700;
-            margin: 6px 0;
-        }
-        .rating {
-            color: #f59e0b;
-            font-size: 0.8rem;
-        }
-        .cart-sidebar {
-            position: fixed;
-            top: 0;
-            right: -380px;
-            width: 350px;
-            max-width: 90vw;
-            height: 100%;
-            background: white;
-            box-shadow: -2px 0 20px rgba(0,0,0,0.15);
-            z-index: 1100;
-            transition: 0.3s;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-        .cart-sidebar.open {
-            right: 0;
-        }
-        .cart-items {
-            flex: 1;
-            overflow-y: auto;
-        }
-        footer {
-            background: #0f172a;
-            color: #94a3b8;
-            padding: 20px 0;
-            margin-top: 30px;
-            text-align: center;
-            font-size: 0.8rem;
-        }
-        @media (max-width: 640px) {
-            .container {
-                padding: 0 12px;
-            }
-            .tech-card {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-        }
-    </style>
-    <!-- GA4 (Replace G-XXXXXXXXXX with your ID) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX');
-        function trackEvent(name, label, price) {
-            if(typeof gtag !== 'undefined') gtag('event', name, { event_label: label, value: price });
-        }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>HBRTechMate – Phone & Laptop Repair | HBR Layout Bangalore</title>
+<meta name="description" content="HBRTechMate – Trusted phone & laptop repair, sales and accessories in HBR Layout, Bangalore. Fast turnaround, genuine parts, best prices guaranteed.">
+<meta property="og:title" content="HBRTechMate 🔧 Phone & Laptop Repair | HBR Bangalore">
+<meta property="og:description" content="Screen replacement, battery, motherboard, data recovery & more. Walk in or WhatsApp us!">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="HBRTechMate">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0a0a0a;
+  --bg2:#111;
+  --bg3:#181818;
+  --card:#1a1a1a;
+  --border:#2a2a2a;
+  --accent:#00d4ff;
+  --accent2:#0099cc;
+  --orange:#ff6b35;
+  --green:#00c853;
+  --txt:#f0f0f0;
+  --txt2:#aaa;
+  --txt3:#666;
+  --radius:16px;
+  --radius-sm:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);color:var(--txt);
+  overflow-x:hidden;line-height:1.6;
+}
+a{text-decoration:none;color:inherit;}
+img{display:block;}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px;}
+
+/* Marquee */
+.marquee-wrap{
+  background:var(--accent);color:#000;
+  padding:6px 0;overflow:hidden;font-size:.75rem;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;
+}
+.marquee-track{
+  display:inline-block;
+  animation:marquee 25s linear infinite;
+}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee-item{display:inline-block;padding:0 2rem;}
+
+/* Nav */
+nav{
+  background:rgba(10,10,10,.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:0 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:200;height:60px;
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;
+  font-size:1.15rem;font-weight:800;
+  display:flex;align-items:center;gap:8px;
+}
+.logo-icon{
+  width:32px;height:32px;background:var(--accent);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;color:#000;font-weight:900;
+}
+.logo-txt span{color:var(--accent);}
+.nav-links{display:flex;gap:2px;}
+.nav-link{
+  font-size:.82rem;font-weight:500;color:var(--txt2);
+  padding:6px 12px;border-radius:8px;transition:all .15s;
+}
+.nav-link:hover{color:var(--txt);background:var(--border);}
+.nav-wa{
+  background:var(--accent);color:#000;
+  padding:8px 16px;border-radius:24px;
+  font-size:.8rem;font-weight:700;
+  display:flex;align-items:center;gap:6px;
+}
+
+/* Hero */
+.hero{
+  min-height:92vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:3rem 1.5rem 4rem;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(0,212,255,.12) 0%,transparent 70%);
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);
+  color:var(--accent);padding:5px 14px;border-radius:20px;
+  font-size:.75rem;font-weight:700;margin-bottom:1.5rem;
+}
+.hero h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2.4rem,7vw,5.5rem);
+  font-weight:800;line-height:1.0;
+  letter-spacing:-.03em;
+  margin-bottom:1rem;
+}
+.hero h1 .line2{
+  background:linear-gradient(90deg,var(--accent),#00aaff,var(--accent));
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-sub{
+  font-size:1rem;color:var(--txt2);max-width:480px;margin:0 auto 2rem;
+  line-height:1.65;
+}
+.hero-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+.btn-primary{
+  background:var(--accent);color:#000;
+  padding:13px 28px;border-radius:50px;
+  font-size:.9rem;font-weight:700;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:transform .15s;
+}
+.btn-primary:hover{transform:translateY(-2px);}
+.btn-outline{
+  background:transparent;color:var(--txt);
+  border:1.5px solid var(--border);
+  padding:13px 28px;border-radius:50px;
+  font-size:.9rem;font-weight:600;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+.hero-stats{
+  display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;
+  margin-top:3.5rem;padding-top:2rem;
+  border-top:1px solid var(--border);
+}
+.hero-stat-val{
+  font-family:'Syne',sans-serif;
+  font-size:2rem;font-weight:800;color:var(--accent);
+}
+.hero-stat-lbl{font-size:.72rem;color:var(--txt3);text-transform:uppercase;margin-top:2px;}
+
+/* Sections */
+.sec{padding:4rem 1.5rem;}
+.sec-inner{max-width:1060px;margin:0 auto;}
+.sec-label{
+  font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:.6rem;
+}
+.sec-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.6rem,4vw,2.6rem);font-weight:800;
+  letter-spacing:-.02em;margin-bottom:.5rem;
+}
+.sec-sub{font-size:.9rem;color:var(--txt2);max-width:500px;line-height:1.6;}
+
+/* Services Grid */
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:1rem;margin-top:2.5rem;
+}
+.service-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.4rem;
+  transition:transform .2s;
+}
+.service-card:hover{transform:translateY(-4px);border-color:rgba(0,212,255,.3);}
+.service-icon{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;margin-bottom:1rem;
+}
+.service-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.35rem;}
+.service-card p{font-size:.78rem;color:var(--txt2);line-height:1.5;}
+.service-price{margin-top:.75rem;font-size:.78rem;font-weight:700;color:var(--accent);}
+
+/* How It Works */
+.how-steps{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1.5rem;margin-top:2.5rem;
+}
+.how-step{text-align:center;padding:1.5rem 1rem;}
+.step-num{
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(0,212,255,.1);border:2px solid rgba(0,212,255,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;
+  color:var(--accent);margin:0 auto 1rem;
+}
+
+/* Brands Scroll */
+.brands-scroll{
+  display:flex;gap:1rem;overflow-x:auto;
+  scrollbar-width:none;padding:.5rem 0 1rem;
+  margin-top:2rem;
+}
+.brands-scroll::-webkit-scrollbar{display:none;}
+.brand-chip{
+  flex-shrink:0;background:var(--card);border:1px solid var(--border);
+  border-radius:50px;padding:10px 20px;
+  font-size:.82rem;font-weight:700;color:var(--txt2);
+  display:flex;align-items:center;gap:8px;
+  white-space:nowrap;
+}
+.brand-chip:hover{border-color:var(--accent);color:var(--accent);}
+
+/* Why Us */
+.why-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:1rem;margin-top:2.5rem;
+}
+.why-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.4rem;
+  display:flex;gap:1rem;align-items:flex-start;
+}
+.why-icon{font-size:1.6rem;flex-shrink:0;}
+
+/* Pricing Table */
+.price-tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+.price-tab{
+  background:var(--card);border:1.5px solid var(--border);
+  color:var(--txt2);padding:7px 16px;border-radius:20px;
+  font-size:.78rem;font-weight:700;cursor:pointer;
+}
+.price-tab.active{background:var(--accent);border-color:var(--accent);color:#000;}
+.price-table{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+}
+.price-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.85rem 1.2rem;border-bottom:1px solid var(--border);
+}
+.price-row:last-child{border-bottom:none;}
+.price-service{font-size:.85rem;font-weight:600;}
+.price-device{font-size:.72rem;color:var(--txt3);margin-top:2px;}
+.price-amt{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--accent);white-space:nowrap;}
+.price-time{font-size:.68rem;color:var(--txt3);text-align:right;}
+
+/* Repair Form */
+.form-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.8rem;
+  margin-top:2rem;
+}
+.form-group{margin-bottom:1rem;}
+.form-group label{display:block;font-size:.8rem;font-weight:600;margin-bottom:.4rem;color:var(--txt2);}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;padding:12px;background:var(--bg2);border:1px solid var(--border);
+  border-radius:8px;color:var(--txt);font-family:'DM Sans',sans-serif;font-size:.9rem;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  outline:none;border-color:var(--accent);
+}
+.submit-btn{
+  background:var(--accent);color:#000;border:none;
+  padding:14px 24px;border-radius:50px;font-weight:700;
+  cursor:pointer;width:100%;font-size:1rem;
+}
+.success-msg{background:rgba(0,200,83,.1);border:1px solid var(--green);color:var(--green);padding:12px;border-radius:8px;margin-bottom:1rem;text-align:center;}
+.error-msg{background:rgba(255,107,53,.1);border:1px solid var(--orange);color:var(--orange);padding:12px;border-radius:8px;margin-bottom:1rem;text-align:center;}
+
+/* Reviews */
+.reviews-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1rem;margin-top:2.5rem;
+}
+.review-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.4rem;
+}
+.stars{color:#ffc107;font-size:.85rem;margin-bottom:.7rem;}
+.review-text{font-size:.82rem;color:var(--txt2);line-height:1.6;font-style:italic;margin-bottom:.9rem;}
+.reviewer-av{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--orange));
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:800;color:#000;
+}
+.reviewer-name{font-size:.82rem;font-weight:700;}
+.reviewer-loc{font-size:.7rem;color:var(--txt3);}
+
+/* Contact */
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1.5rem;margin-top:2.5rem;
+}
+@media(max-width:680px){.contact-grid{grid-template-columns:1fr;}}
+.contact-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+}
+.contact-card iframe{width:100%;height:250px;border:none;filter:grayscale(1) invert(1);}
+.contact-info{padding:1.2rem;}
+.contact-info h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:1rem;color:var(--accent);}
+.contact-link{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.7rem .9rem;border-radius:10px;
+  background:var(--bg2);border:1px solid var(--border);
+  font-size:.82rem;margin-bottom:.6rem;
+}
+.contact-link:hover{border-color:var(--accent);}
+.cl-icon{font-size:1.1rem;width:28px;}
+.cl-label{font-size:.66rem;color:var(--txt3);display:block;}
+.cl-val{font-weight:700;color:var(--txt);}
+
+/* CTA */
+.cta-sec{
+  background:linear-gradient(135deg,#001a22,#002a35);
+  border-top:1px solid rgba(0,212,255,.15);
+  border-bottom:1px solid rgba(0,212,255,.15);
+  padding:4rem 1.5rem;text-align:center;
+}
+.cta-sec h2{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.8rem,4vw,3rem);font-weight:800;
+  margin-bottom:.6rem;
+}
+
+/* Footer */
+footer{
+  background:var(--bg2);border-top:1px solid var(--border);
+  padding:2.5rem 1.5rem;text-align:center;
+}
+.footer-logo{
+  font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;
+  color:var(--accent);margin-bottom:.5rem;
+}
+
+/* Float WA */
+.float-wa{
+  position:fixed;bottom:22px;right:18px;z-index:999;
+  background:#25d366;color:white;
+  width:54px;height:54px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;text-decoration:none;
+  box-shadow:0 4px 20px rgba(37,211,102,.5);
+  animation:float-bob 3s ease-in-out infinite;
+}
+@keyframes float-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+/* Bottom Nav */
+.bottom-nav{
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:190;
+  background:rgba(17,17,17,.95);backdrop-filter:blur(20px);
+  border-top:1px solid var(--border);
+  padding:8px 0 max(8px,env(safe-area-inset-bottom));
+}
+.bottom-nav-inner{display:flex;justify-content:space-around;}
+.bn-tab{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:4px 12px;border-radius:8px;cursor:pointer;
+  text-decoration:none;color:var(--txt3);flex:1;
+}
+.bn-tab.active,.bn-tab:hover{color:var(--accent);}
+.bn-icon{font-size:1.2rem;}
+.bn-label{font-size:.58rem;font-weight:700;text-transform:uppercase;}
+
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .bottom-nav{display:block;}
+  body{padding-bottom:70px;}
+}
+</style>
 </head>
 <body>
 
-<header class="header">
-    <div class="container header-flex">
-        <div class="logo">
-            <h1>HBR<span>TechMate</span></h1>
-            <div style="font-size: 0.7rem;">📱 Aggregator | Multiple Shops</div>
-        </div>
-        <div class="cart-icon" id="cartIcon">
-            <i class="fas fa-shopping-cart"></i> Cart
-            <span class="cart-count" id="cartCount">0</span>
-        </div>
-    </div>
-</header>
+<!-- FLOAT WA -->
+<a href="https://wa.me/918105122693?text=Hi!%20I%20need%20help%20with%20my%20device%20repair." target="_blank" class="float-wa">💬</a>
 
-<main class="container">
-    <!-- Hero Section -->
-    <div class="hero">
-        <div class="badge">⚡ Average 30 min on‑visit repair</div>
-        <h2 style="font-size: 1.6rem;">Your Device. Fixed Fast.</h2>
-        <p>Partner shops in HBR Layout, Indiranagar & more. Genuine parts, same‑day service.</p>
-        <div style="display: flex; gap: 12px; justify-content: center; margin-top: 12px; flex-wrap: wrap;">
-            <span>⭐ 4.9 Google Rating</span>
-            <span>🛡️ 30-day warranty</span>
-            <span>🚗 Pickup & Drop available</span>
-        </div>
-    </div>
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <a href="#" class="bn-tab active"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></a>
+    <a href="#services" class="bn-tab"><span class="bn-icon">🔧</span><span class="bn-label">Services</span></a>
+    <a href="https://wa.me/918105122693" target="_blank" class="bn-tab"><span class="bn-icon">💬</span><span class="bn-label">WhatsApp</span></a>
+    <a href="#pricing" class="bn-tab"><span class="bn-icon">💰</span><span class="bn-label">Pricing</span></a>
+    <a href="#contact" class="bn-tab"><span class="bn-icon">📍</span><span class="bn-label">Location</span></a>
+  </div>
+</div>
 
-    <!-- HELP FORM (MOVED ABOVE) + COMPACT -->
-    <div class="form-section">
-        <h3><i class="fas fa-headset"></i> Quick Help Request</h3>
-        <p>We'll connect you to nearest partner shop within 15 mins</p>
-        <form id="leadForm">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                <input type="text" placeholder="Your Name" required style="padding: 10px; border-radius: 30px; border:1px solid #ccc;">
-                <input type="tel" placeholder="Phone Number" required style="padding: 10px; border-radius: 30px;">
-                <select style="padding: 10px; border-radius: 30px;">
-                    <option>iPhone Repair</option><option>Samsung Repair</option><option>Laptop Repair</option><option>Battery/Screen</option>
-                </select>
-                <input type="text" placeholder="PIN Code (optional)" style="padding: 10px; border-radius: 30px;">
-            </div>
-            <textarea rows="2" placeholder="Describe issue (e.g., iPhone 15 screen crack)" style="width:100%; margin-top: 10px; border-radius: 20px; padding: 10px;"></textarea>
-            <button type="submit" class="btn" style="margin-top: 12px; width:100%;">Send Request via WhatsApp <i class="fab fa-whatsapp"></i></button>
-        </form>
-        <div id="formMessage" style="margin-top: 10px; font-size:0.85rem; color:green;"></div>
-    </div>
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">🔧 Screen Replacement</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">🔋 Battery Replacement</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">💾 Data Recovery</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">🖥️ Laptop Repair</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">📱 Phone Repair</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">⚡ Same Day Service</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">✅ Genuine Parts</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">🛡️ 30-Day Warranty</span><span class="marquee-dot">·</span>
+  </div>
+</div>
 
-    <!-- TECHNICIAN CARD (Abrar Shaik - Indiranagar) -->
-    <div class="tech-card">
-        <div>
-            <i class="fas fa-user-circle" style="font-size: 2rem; color:#f59e0b;"></i>
-            <strong style="font-size:1.1rem;"> Abrar Shaik</strong> <span style="background:#e2e8f0; padding:2px 8px; border-radius: 20px;">Indiranagar</span>
-            <p style="margin-top: 6px;">🔧 6+ years experience | 📱 Mobile & Laptop expert | 🚗 Free pickup & drop within 5km</p>
-        </div>
-        <div>
-            <a href="https://wa.me/918105122693?text=Hi%20Abrar%2C%20I%20need%20repair%20(PIN%3A%20HBRMATE)" class="btn btn-small" target="_blank"><i class="fab fa-whatsapp"></i> Chat with Abrar</a>
-        </div>
-    </div>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="logo-icon">H</div>
+    <div class="logo-txt">HBR<span>Tech</span>Mate</div>
+  </div>
+  <div class="nav-links">
+    <a href="#services" class="nav-link">Services</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+    <a href="#reviews" class="nav-link">Reviews</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </div>
+  <a href="https://wa.me/918105122693?text=Hi!%20I%20need%20a%20device%20repair%20quote." target="_blank" class="nav-wa">💬 WhatsApp Us</a>
+</nav>
 
-    <!-- PRODUCTS SECTION (Compact) -->
-    <h3 style="margin: 20px 0 10px;"><i class="fas fa-mobile-alt"></i> Shop Devices & Genuine Spares</h3>
-    <div class="product-grid" id="productGrid"></div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-tag">🟢 Open Now · HBR Layout, Bangalore</div>
+  <h1>Your Device.<br><span class="line2">Fixed Fast.</span></h1>
+  <p class="hero-sub">Trusted phone & laptop repair in HBR Layout, Bangalore. Screen, battery, motherboard, data recovery & more — same day service with genuine parts.</p>
+  <div class="hero-btns">
+    <a href="https://wa.me/918105122693?text=Hi!%20I%20need%20a%20repair%20quote." target="_blank" class="btn-primary">💬 Get Free Quote</a>
+    <a href="#services" class="btn-outline">🔧 Our Services</a>
+  </div>
+  <div class="hero-stats">
+    <div><div class="hero-stat-val">2000+</div><div class="hero-stat-lbl">Devices Fixed</div></div>
+    <div><div class="hero-stat-val">⭐ 4.9</div><div class="hero-stat-lbl">Google Rating</div></div>
+    <div><div class="hero-stat-val">30 Min</div><div class="hero-stat-lbl">Avg. Repair Time</div></div>
+    <div><div class="hero-stat-val">30 Day</div><div class="hero-stat-lbl">Warranty</div></div>
+  </div>
+</section>
 
-    <!-- Cart Sidebar -->
-    <div id="cartSidebar" class="cart-sidebar">
-        <div style="display:flex; justify-content:space-between;">
-            <h3>🛒 Cart</h3>
-            <i class="fas fa-times" id="closeCart" style="cursor:pointer; font-size:20px;"></i>
-        </div>
-        <div id="cartItemsList" class="cart-items">No items added.</div>
-        <div><strong>Total: ₹<span id="cartTotal">0</span></strong></div>
-        <button class="btn" id="checkoutBtn" style="width:100%; margin-top:10px;">Order via WhatsApp</button>
+<!-- SERVICES -->
+<section class="sec" id="services">
+  <div class="sec-inner">
+    <div class="sec-label">What We Do</div>
+    <h2 class="sec-title">Our Repair Services</h2>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-icon" style="background:rgba(0,212,255,.1)">📱</div><h3>Screen Replacement</h3><p>Cracked or broken display? We replace screens for all major brands.</p><div class="service-price">Starting ₹599 →</div></div>
+      <div class="service-card"><div class="service-icon" style="background:rgba(255,107,53,.1)">🔋</div><h3>Battery Replacement</h3><p>Phone draining fast? Genuine high-capacity batteries.</p><div class="service-price">Starting ₹399 →</div></div>
+      <div class="service-card"><div class="service-icon" style="background:rgba(255,193,7,.1)">💾</div><h3>Data Recovery</h3><p>Lost photos or files? We recover data from damaged devices.</p><div class="service-price">Starting ₹999 →</div></div>
+      <div class="service-card"><div class="service-icon" style="background:rgba(156,39,176,.1)">🖥️</div><h3>Laptop Repair</h3><p>Screen, keyboard, motherboard — complete laptop repair.</p><div class="service-price">Starting ₹499 →</div></div>
+      <div class="service-card"><div class="service-icon" style="background:rgba(0,200,83,.1)">🔌</div><h3>Charging Port Fix</h3><p>Phone not charging? We clean or replace the charging port.</p><div class="service-price">Starting ₹299 →</div></div>
+      <div class="service-card"><div class="service-icon" style="background:rgba(255,107,53,.1)">🌊</div><h3>Water Damage Repair</h3><p>Dropped in water? We dry, clean and repair water-damaged devices.</p><div class="service-price">Starting ₹799 →</div></div>
+      <div class="service-card"><div class="service-icon" style="background:rgba(0,212,255,.1)">🛒</div><h3>Phone & Laptop Sales</h3><p>Certified refurbished & new devices at best prices.</p><div class="service-price">Best Prices →</div></div>
+      <div class="service-card"><div class="service-icon" style="background:rgba(255,193,7,.1)">🎧</div><h3>Accessories & Spares</h3><p>Chargers, cables, cases, screen guards.</p><div class="service-price">Wholesale Rates →</div></div>
     </div>
+  </div>
+</section>
 
-    <!-- Simple Reviews (Compact) -->
-    <div style="background:white; border-radius:16px; padding:15px; margin:25px 0;">
-        <h3>⭐ Customer Reviews</h3>
-        <div style="display:flex; gap:12px; flex-wrap:wrap; font-size:0.85rem;">
-            <span>★★★★★ "Quick repair in Indiranagar" - Ramesh</span>
-            <span>★★★★★ "Abrar fixed my iPhone in 30 min" - Sneha</span>
-        </div>
+<!-- HOW IT WORKS -->
+<section class="sec" style="background:var(--bg2)">
+  <div class="sec-inner">
+    <div class="sec-label">Simple Process</div>
+    <h2 class="sec-title">How It Works</h2>
+    <div class="how-steps">
+      <div class="how-step"><div class="step-num">1</div><h4>WhatsApp Us</h4><p>Tell us your problem — free quote instantly.</p></div>
+      <div class="how-step"><div class="step-num">2</div><h4>Walk In or Drop Off</h4><p>Visit our store, free diagnosis on the spot.</p></div>
+      <div class="how-step"><div class="step-num">3</div><h4>Fast Repair</h4><p>20–60 minutes using genuine parts.</p></div>
+      <div class="how-step"><div class="step-num">4</div><h4>Collect & Go</h4><p>Pay only after satisfaction. 30-day warranty.</p></div>
     </div>
-</main>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section class="sec">
+  <div class="sec-inner">
+    <div class="sec-label">All Brands Supported</div>
+    <h2 class="sec-title">We Fix Every Brand</h2>
+    <div class="brands-scroll">
+      <div class="brand-chip">🍎 Apple iPhone</div><div class="brand-chip">📱 Samsung</div><div class="brand-chip">🔴 OnePlus</div>
+      <div class="brand-chip">📲 Vivo</div><div class="brand-chip">📱 Oppo</div><div class="brand-chip">📱 Realme</div>
+      <div class="brand-chip">📱 Redmi / Xiaomi</div><div class="brand-chip">📱 Poco</div><div class="brand-chip">💻 Dell</div>
+      <div class="brand-chip">💻 HP</div><div class="brand-chip">💻 Lenovo</div><div class="brand-chip">💻 Asus</div>
+      <div class="brand-chip">💻 Acer</div><div class="brand-chip">🍎 MacBook</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="sec" style="background:var(--bg2)">
+  <div class="sec-inner">
+    <div class="sec-label">Why HBRTechMate</div>
+    <h2 class="sec-title">Why Customers Choose Us</h2>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-icon">⚡</div><div><h4>Same Day Repair</h4><p>Most repairs in 30–60 minutes.</p></div></div>
+      <div class="why-card"><div class="why-icon">✅</div><div><h4>Genuine Parts Only</h4><p>Certified genuine parts.</p></div></div>
+      <div class="why-card"><div class="why-icon">🛡️</div><div><h4>30-Day Warranty</h4><p>All repairs warrantied.</p></div></div>
+      <div class="why-card"><div class="why-icon">💰</div><div><h4>Transparent Pricing</h4><p>Free diagnosis, upfront price.</p></div></div>
+      <div class="why-card"><div class="why-icon">👨‍🔧</div><div><h4>Certified Technicians</h4><p>5+ years experience.</p></div></div>
+      <div class="why-card"><div class="why-icon">📍</div><div><h4>Convenient Location</h4><p>HBR Layout, Bangalore.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec" id="pricing">
+  <div class="sec-inner">
+    <div class="sec-label">Transparent Pricing</div>
+    <h2 class="sec-title">Repair Price Guide</h2>
+    <div class="price-tabs">
+      <div class="price-tab active" onclick="showPrices('phone',this)">📱 Phone</div>
+      <div class="price-tab" onclick="showPrices('laptop',this)">💻 Laptop</div>
+      <div class="price-tab" onclick="showPrices('iphone',this)">🍎 iPhone</div>
+    </div>
+    <div class="price-table" id="priceTable"></div>
+  </div>
+</section>
+
+<!-- REPAIR REQUEST FORM -->
+<section class="sec" style="background:var(--bg2)" id="repair-form">
+  <div class="sec-inner">
+    <div class="sec-label">Raise a Request</div>
+    <h2 class="sec-title">Need a Repair?</h2>
+    <p class="sec-sub">Fill the form below. We'll contact you within 15 minutes.</p>
+    <div class="form-card">
+      <div id="formMessage"></div>
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" id="custName" placeholder="Enter your full name">
+      </div>
+      <div class="form-group">
+        <label>Phone Number *</label>
+        <input type="tel" id="custPhone" placeholder="Your WhatsApp number">
+      </div>
+      <div class="form-group">
+        <label>Device Type *</label>
+        <select id="deviceType">
+          <option value="iPhone">iPhone</option>
+          <option value="Android Phone">Android Phone</option>
+          <option value="Laptop">Laptop</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Device Model</label>
+        <input type="text" id="deviceModel" placeholder="e.g., iPhone 13, Samsung S23, Dell XPS">
+      </div>
+      <div class="form-group">
+        <label>Issue Description *</label>
+        <textarea id="issueDesc" rows="3" placeholder="Describe the problem..."></textarea>
+      </div>
+      <button class="submit-btn" onclick="submitRepair()">📩 Submit Repair Request</button>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec" id="reviews">
+  <div class="sec-inner">
+    <div class="sec-label">Customer Reviews</div>
+    <h2 class="sec-title">What HBR Locals Say</h2>
+    <div class="reviews-grid">
+      <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"Got my Samsung S22 screen replaced in under 40 minutes. Perfect quality!"</div><div class="reviewer-name">Rahul Sharma</div><div class="reviewer-loc">📍 HBR Layout</div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"My laptop motherboard was dead. They recovered all my data. Highly recommend!"</div><div class="reviewer-name">Priya Menon</div><div class="reviewer-loc">📍 Kalyan Nagar</div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"iPhone 14 battery replaced. Original battery, 30 min service. Best repair shop in HBR!"</div><div class="reviewer-name">Arjun Nair</div><div class="reviewer-loc">📍 Banaswadi</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec" id="contact">
+  <div class="sec-inner">
+    <div class="sec-label">Find Us</div>
+    <h2 class="sec-title">Visit Our Store</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.3!2d77.6280!3d13.0440!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae17e!3A0x1!2sHBR+Layout+Bangalore!5e0!3m2!1sen!2sin!4v1700000000001" loading="lazy"></iframe>
+      </div>
+      <div class="contact-card">
+        <div class="contact-info">
+          <h3>🔧 HBRTechMate</h3>
+          <a href="https://wa.me/918105122693" target="_blank" class="contact-link"><span class="cl-icon">💬</span><div><span class="cl-label">WhatsApp</span><span class="cl-val">8105122693</span></div></a>
+          <a href="tel:+918105122693" class="contact-link"><span class="cl-icon">📞</span><div><span class="cl-label">Call Us</span><span class="cl-val">8105122693</span></div></a>
+          <div class="contact-link"><span class="cl-icon">📍</span><div><span class="cl-label">Address</span><span class="cl-val">No 8/2, 1st Cross St, Nagawara Main Rd, Bengaluru 560045</span></div></div>
+          <div class="contact-link"><span class="cl-icon">🕐</span><div><span class="cl-label">Hours</span><span class="cl-val">Mon–Sat: 9 AM – 8 PM | Sun: 10 AM – 6 PM</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <h2>Device Broken?<br>We Fix It Today. ⚡</h2>
+  <p>WhatsApp us your problem — get a free quote in 2 minutes. No fix, no fee!</p>
+  <div class="hero-btns" style="margin-top:20px">
+    <a href="https://wa.me/918105122693?text=Hi!%20I%20need%20repair%20help." target="_blank" class="btn-primary">💬 WhatsApp for Free Quote</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-    <div class="container">© 2025 HBRTechMate — Trusted repair aggregator | Multiple locations</div>
+  <div class="footer-logo">🔧 HBRTechMate</div>
+  <p>No 8/2, 1st Cross St, Nagawara Main Rd, Bengaluru 560045<br>Trusted Phone & Laptop Repair · Sales · Accessories</p>
+  <p>© 2025 HBRTechMate · All rights reserved</p>
 </footer>
 
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+
 <script>
-    const products = [
-        { id:1, name:"iPhone 15 (New)", price:65900, desc:"128GB, 1yr warranty", icon:"📱" },
-        { id:2, name:"iPhone 15 Pro", price:99900, desc:"Titanium, 256GB", icon:"📱💎" },
-        { id:3, name:"Samsung S24", price:74900, desc:"AI smartphone", icon:"📱✨" },
-        { id:4, name:"iPhone 15 Screen Protector", price:499, desc:"9H tempered glass", icon:"🛡️" },
-        { id:5, name:"20W Fast Charger (USB-C)", price:899, desc:"MFi certified", icon:"⚡" },
-        { id:6, name:"Refurb iPhone 13", price:37900, desc:"6 months warranty", icon:"🔄" }
-    ];
-    let cart = [];
-    function saveCart() { localStorage.setItem("hbrCart", JSON.stringify(cart)); updateUI(); }
-    function loadCart() { const c = localStorage.getItem("hbrCart"); if(c) cart = JSON.parse(c); updateUI(); }
-    function updateUI() {
-        let count = cart.reduce((s,i)=>s+i.quantity,0);
-        document.getElementById("cartCount").innerText = count;
-        let container = document.getElementById("cartItemsList");
-        if(cart.length===0) { container.innerHTML="No items"; document.getElementById("cartTotal").innerText="0"; return; }
-        let html="", total=0;
-        cart.forEach(item=>{
-            total += item.price*item.quantity;
-            html += `<div style="display:flex; justify-content:space-between; margin:8px 0;"><span>${item.name} x${item.quantity}</span><span>₹${item.price*item.quantity}</span><button class="remove-item" data-id="${item.id}" style="background:#ef4444; border:none; color:white; padding:2px 8px; border-radius:20px;">X</button></div>`;
-        });
-        container.innerHTML = html;
-        document.getElementById("cartTotal").innerText = total;
-        document.querySelectorAll(".remove-item").forEach(btn=>{
-            btn.addEventListener("click",()=>{
-                let id = parseInt(btn.dataset.id);
-                cart = cart.filter(i=>i.id!==id);
-                saveCart();
-            });
-        });
+// Firebase Config
+const firebaseConfig = {
+  apiKey: "AIzaSyAlYFAvawCvDobzjDuAJrsW4QUA-QII_qA",
+  authDomain: "hbrtechmate.firebaseapp.com",
+  projectId: "hbrtechmate",
+  storageBucket: "hbrtechmate.firebasestorage.app",
+  messagingSenderId: "842820976781",
+  appId: "1:842820976781:web:3dc4bf7764d3d8fd61e2c4"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// Submit repair request
+async function submitRepair() {
+    const name = document.getElementById('custName').value.trim();
+    const phone = document.getElementById('custPhone').value.trim();
+    const deviceType = document.getElementById('deviceType').value;
+    const deviceModel = document.getElementById('deviceModel').value.trim();
+    const issue = document.getElementById('issueDesc').value.trim();
+    
+    if (!name || !phone || !issue) {
+        showMessage('Please fill all required fields', 'error');
+        return;
     }
-    function addToCart(product) {
-        let existing = cart.find(i=>i.id===product.id);
-        if(existing) existing.quantity++;
-        else cart.push({...product, quantity:1});
-        saveCart();
-        trackEvent("add_to_cart", product.name, product.price);
-        alert(`${product.name} added`);
-    }
-    function renderProducts() {
-        const grid = document.getElementById("productGrid");
-        grid.innerHTML = products.map(p=>`
-            <div class="product-card" data-id="${p.id}">
-                <div class="product-img">${p.icon}</div>
-                <div class="product-info">
-                    <div class="product-title">${p.name}</div>
-                    <div class="product-price">₹${p.price.toLocaleString()}</div>
-                    <button class="btn view-details" data-id="${p.id}" style="width:100%; margin-top:8px;">View & Add</button>
-                </div>
-            </div>
-        `).join("");
-        document.querySelectorAll(".view-details").forEach(btn=>{
-            btn.addEventListener("click",(e)=>{
-                let id = parseInt(btn.dataset.id);
-                let prod = products.find(p=>p.id===id);
-                if(prod) {
-                    let msg = `${prod.name}\n${prod.desc}\nPrice: ₹${prod.price}\nAdd to cart?`;
-                    if(confirm(msg)) addToCart(prod);
-                    trackEvent("select_item", prod.name, prod.price);
-                }
-            });
+    
+    try {
+        await db.collection('repairs').add({
+            name: name,
+            phone: phone,
+            deviceType: deviceType,
+            deviceModel: deviceModel,
+            issue: issue,
+            status: 'Pending',
+            createdAt: new Date()
         });
+        
+        showMessage('✅ Request submitted! We will contact you within 15 minutes on WhatsApp.', 'success');
+        document.getElementById('custName').value = '';
+        document.getElementById('custPhone').value = '';
+        document.getElementById('deviceModel').value = '';
+        document.getElementById('issueDesc').value = '';
+        
+        // Send WhatsApp notification to admin
+        window.open(`https://wa.me/918105122693?text=🔧 *New Repair Request!*%0A%0A👤 Name: ${name}%0A📞 Phone: ${phone}%0A📱 Device: ${deviceType} ${deviceModel}%0A🛠️ Issue: ${issue}%0A%0A📍 Location: HBR Layout`, '_blank');
+        
+    } catch (error) {
+        console.error(error);
+        showMessage('Error submitting request. Please try again.', 'error');
     }
-    document.addEventListener("DOMContentLoaded",()=>{
-        renderProducts(); loadCart();
-        document.getElementById("cartIcon").addEventListener("click",()=>document.getElementById("cartSidebar").classList.add("open"));
-        document.getElementById("closeCart").addEventListener("click",()=>document.getElementById("cartSidebar").classList.remove("open"));
-        document.getElementById("checkoutBtn").addEventListener("click",()=>{
-            if(cart.length===0) return alert("Cart empty");
-            let msg = "Order from HBRTechMate (PIN:HBRMATE):\n"+cart.map(i=>`${i.name} x${i.quantity}`).join("\n")+`\nTotal: ₹${document.getElementById("cartTotal").innerText}`;
-            window.open(`https://wa.me/918105122693?text=${encodeURIComponent(msg)}`,"_blank");
-        });
-        document.getElementById("leadForm").addEventListener("submit",(e)=>{
+}
+
+function showMessage(msg, type) {
+    const msgDiv = document.getElementById('formMessage');
+    msgDiv.innerHTML = `<div class="${type === 'success' ? 'success-msg' : 'error-msg'}">${msg}</div>`;
+    setTimeout(() => msgDiv.innerHTML = '', 5000);
+}
+
+// Price tables
+const prices = {
+    phone: [{ service:'Screen Replacement', device:'Samsung / Vivo / Oppo / Realme', price:'₹599 – ₹2,499', time:'30 min' },{ service:'Screen Replacement', device:'OnePlus / Motorola', price:'₹899 – ₹3,499', time:'30 min' },{ service:'Battery Replacement', device:'All Android Phones', price:'₹399 – ₹999', time:'20 min' },{ service:'Charging Port Repair', device:'All Android Phones', price:'₹299 – ₹799', time:'30 min' },{ service:'Water Damage Repair', device:'All Phones', price:'₹799 – ₹2,999', time:'1–2 hrs' }],
+    laptop: [{ service:'Screen Replacement', device:'Dell / HP / Lenovo', price:'₹2,499 – ₹8,999', time:'1–2 hrs' },{ service:'Battery Replacement', device:'All Laptops', price:'₹1,499 – ₹4,999', time:'45 min' },{ service:'Keyboard Replacement', device:'All Laptops', price:'₹999 – ₹3,499', time:'1 hr' },{ service:'RAM Upgrade', device:'All Laptops', price:'₹999 – ₹3,999', time:'30 min' },{ service:'SSD Upgrade', device:'All Laptops', price:'₹1,499 – ₹5,999', time:'1 hr' }],
+    iphone: [{ service:'Screen Replacement', device:'iPhone 11/12/13', price:'₹2,499 – ₹5,999', time:'30 min' },{ service:'Screen Replacement', device:'iPhone 14/15', price:'₹4,999 – ₹9,999', time:'45 min' },{ service:'Battery Replacement', device:'All iPhone Models', price:'₹999 – ₹2,999', time:'20 min' },{ service:'Charging Port', device:'All iPhones', price:'₹1,299 – ₹2,499', time:'30 min' },{ service:'Back Glass', device:'iPhone 11–15', price:'₹1,999 – ₹4,999', time:'1 hr' }]
+};
+
+function showPrices(category, el) {
+    document.querySelectorAll('.price-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('priceTable').innerHTML = prices[category].map(r => `<div class="price-row"><div><div class="price-service">${r.service}</div><div class="price-device">${r.device}</div></div><div style="text-align:right"><div class="price-amt">${r.price}</div><div class="price-time">⏱ ${r.time}</div></div></div>`).join('');
+}
+showPrices('phone', document.querySelector('.price-tab'));
+
+// Smooth scroll for bottom nav
+document.querySelectorAll('.bn-tab, .nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href && href.startsWith('#')) {
             e.preventDefault();
-            document.getElementById("formMessage").innerHTML = "✅ Request sent! Technician Abrar will contact you shortly.";
-            trackEvent("submit_lead_form", "help request", 0);
-            setTimeout(()=>document.getElementById("formMessage").innerHTML="",3000);
-            e.target.reset();
-        });
+            document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+        }
     });
+});
 </script>
 </body>
 </html>
